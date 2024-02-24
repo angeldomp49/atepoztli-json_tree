@@ -6,13 +6,13 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-class ObjectLeaftBuilderTest {
+class ObjectLeafBuilderTest {
 
     @Test
     void build() {
 
         var result =
-                ObjectLeaftBuilder.builder()
+                ObjectLeafBuilder.builder()
                         .put("id", 1)
                         .put("name", "Jhon")
                         .put("hasPassed", false)

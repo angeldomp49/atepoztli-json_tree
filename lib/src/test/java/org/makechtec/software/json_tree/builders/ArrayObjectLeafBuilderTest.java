@@ -12,7 +12,7 @@ class ArrayObjectLeafBuilderTest {
     void build() {
 
         var item =
-                ObjectLeaftBuilder.builder()
+                ObjectLeafBuilder.builder()
                         .put("id", 1)
                         .put("name", "Jhon")
                         .put("hasPassed", false)

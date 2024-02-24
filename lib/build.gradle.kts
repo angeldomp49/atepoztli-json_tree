@@ -14,7 +14,6 @@ plugins {
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
-
 }
 
 dependencies {
@@ -48,7 +47,7 @@ publishing {
         create<MavenPublication>("maven") {
             groupId = "org.makechtec.software"
             artifactId = "json_tree"
-            version = "2.0.0"
+            version = "2.0.1"
 
             from(components["java"])
         }

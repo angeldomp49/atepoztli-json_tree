@@ -9,33 +9,33 @@ import org.makechtec.software.json_tree.primitives.StringJSONLeaf;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ObjectLeaftBuilder {
+public class ObjectLeafBuilder {
 
     private final Map<String, JSONLeaf> leafs = new HashMap<>();
 
-    private ObjectLeaftBuilder() {
+    private ObjectLeafBuilder() {
     }
 
-    public static ObjectLeaftBuilder builder() {
-        return new ObjectLeaftBuilder();
+    public static ObjectLeafBuilder builder() {
+        return new ObjectLeafBuilder();
     }
 
-    public ObjectLeaftBuilder put(String key, Number number) {
+    public ObjectLeafBuilder put(String key, Number number) {
         this.leafs.put(key, NumberJSONLeaf.of(number));
         return this;
     }
 
-    public ObjectLeaftBuilder put(String key, boolean bool) {
+    public ObjectLeafBuilder put(String key, boolean bool) {
         this.leafs.put(key, BooleanJSONLeaf.of(bool));
         return this;
     }
 
-    public ObjectLeaftBuilder put(String key, String value) {
+    public ObjectLeafBuilder put(String key, String value) {
         this.leafs.put(key, StringJSONLeaf.of(value));
         return this;
     }
 
-    public ObjectLeaftBuilder put(String key, JSONLeaf jsonLeaf) {
+    public ObjectLeafBuilder put(String key, JSONLeaf jsonLeaf) {
         this.leafs.put(key, jsonLeaf);
         return this;
     }
