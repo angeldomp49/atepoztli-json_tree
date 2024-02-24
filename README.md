@@ -1,4 +1,32 @@
 
+## Requirements ##
+
+- Java 17+
+
+___
+
+## Dependency ##
+
+### Maven Dependency ###
+
+    <dependency>
+        <groupId>org.makechtec.software</groupId>
+        <artifactId>json_tree</artifactId>
+        <version>2.0.0</version>
+    </dependency>
+
+### Gradle for groovy ###
+
+    implementation 'org.makechtec.software:json_tree:2.0.0'
+
+### Gradle for kotlin ###
+
+    implementation ("org.makechtec.software:json_tree:2.0.0")
+
+___
+
+## Usage ##
+
 Examples:
 
     var item =
