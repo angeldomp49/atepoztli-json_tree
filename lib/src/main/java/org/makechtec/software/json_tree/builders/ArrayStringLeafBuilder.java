@@ -1,6 +1,5 @@
 package org.makechtec.software.json_tree.builders;
 
-import org.makechtec.software.json_tree.arrays.ArrayNumberLeaf;
 import org.makechtec.software.json_tree.arrays.ArrayStringLeaf;
 
 import java.util.HashSet;
@@ -10,18 +9,19 @@ public class ArrayStringLeafBuilder {
 
     private final Set<String> items = new HashSet<>();
 
-    private ArrayStringLeafBuilder(){}
+    private ArrayStringLeafBuilder() {
+    }
 
-    public static ArrayStringLeafBuilder builder(){
+    public static ArrayStringLeafBuilder builder() {
         return new ArrayStringLeafBuilder();
     }
 
-    public ArrayStringLeafBuilder add(String item){
+    public ArrayStringLeafBuilder add(String item) {
         this.items.add(item);
         return this;
     }
 
-    public ArrayStringLeaf build(){
+    public ArrayStringLeaf build() {
         return new ArrayStringLeaf(this.items);
     }
 

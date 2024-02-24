@@ -10,13 +10,12 @@ public class NumberJSONLeaf implements JSONLeaf {
         this.value = value;
     }
 
+    public static NumberJSONLeaf of(Number value) {
+        return new NumberJSONLeaf(value);
+    }
 
     @Override
     public String getLeafValue() {
         return this.value + "";
-    }
-
-    public static NumberJSONLeaf of(Number value){
-        return new NumberJSONLeaf(value);
     }
 }

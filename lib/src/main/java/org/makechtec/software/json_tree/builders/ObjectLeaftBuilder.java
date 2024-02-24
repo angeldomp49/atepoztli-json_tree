@@ -13,33 +13,34 @@ public class ObjectLeaftBuilder {
 
     private final Map<String, JSONLeaf> leafs = new HashMap<>();
 
-    private ObjectLeaftBuilder(){}
+    private ObjectLeaftBuilder() {
+    }
 
-    public static ObjectLeaftBuilder builder(){
+    public static ObjectLeaftBuilder builder() {
         return new ObjectLeaftBuilder();
     }
 
-    public ObjectLeaftBuilder put(String key, Number number){
+    public ObjectLeaftBuilder put(String key, Number number) {
         this.leafs.put(key, NumberJSONLeaf.of(number));
         return this;
     }
 
-    public ObjectLeaftBuilder put(String key, boolean bool){
+    public ObjectLeaftBuilder put(String key, boolean bool) {
         this.leafs.put(key, BooleanJSONLeaf.of(bool));
         return this;
     }
 
-    public ObjectLeaftBuilder put(String key, String value){
+    public ObjectLeaftBuilder put(String key, String value) {
         this.leafs.put(key, StringJSONLeaf.of(value));
         return this;
     }
 
-    public ObjectLeaftBuilder put(String key, JSONLeaf jsonLeaf){
+    public ObjectLeaftBuilder put(String key, JSONLeaf jsonLeaf) {
         this.leafs.put(key, jsonLeaf);
         return this;
     }
 
-    public ObjectLeaf build(){
+    public ObjectLeaf build() {
         return new ObjectLeaf(this.leafs);
     }
 

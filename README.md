@@ -1,4 +1,3 @@
-
 ## Requirements ##
 
 - Java 17+

@@ -2,7 +2,7 @@ package org.makechtec.software.json_tree;
 
 import java.util.Map;
 
-public class ObjectLeaf implements JSONLeaf{
+public class ObjectLeaf implements JSONLeaf {
 
     private final Map<String, JSONLeaf> leafs;
 
@@ -25,7 +25,7 @@ public class ObjectLeaf implements JSONLeaf{
                             .append(',');
                 });
 
-        if(responseBuilder.lastIndexOf(",") != -1){
+        if (responseBuilder.lastIndexOf(",") != -1) {
             responseBuilder.deleteCharAt(responseBuilder.lastIndexOf(","));
         }
 

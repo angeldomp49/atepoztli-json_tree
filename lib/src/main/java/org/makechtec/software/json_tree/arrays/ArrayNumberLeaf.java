@@ -17,11 +17,11 @@ public class ArrayNumberLeaf implements JSONLeaf {
 
         var responseBuilder = new StringBuilder("[");
 
-        this.values.forEach( value -> {
+        this.values.forEach(value -> {
             responseBuilder.append(value).append(',');
-        } );
+        });
 
-        if(responseBuilder.lastIndexOf(",") != -1){
+        if (responseBuilder.lastIndexOf(",") != -1) {
             responseBuilder.deleteCharAt(responseBuilder.lastIndexOf(","));
         }
 

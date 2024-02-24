@@ -10,12 +10,12 @@ public class StringJSONLeaf implements JSONLeaf {
         this.value = value;
     }
 
-    @Override
-    public String getLeafValue() {
-        return "\""+this.value+"\"";
+    public static StringJSONLeaf of(String value) {
+        return new StringJSONLeaf(value);
     }
 
-    public static StringJSONLeaf of(String value){
-        return new StringJSONLeaf(value);
+    @Override
+    public String getLeafValue() {
+        return "\"" + this.value + "\"";
     }
 }

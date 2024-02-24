@@ -10,12 +10,12 @@ public class BooleanJSONLeaf implements JSONLeaf {
         this.value = value;
     }
 
+    public static BooleanJSONLeaf of(boolean value) {
+        return new BooleanJSONLeaf(value);
+    }
+
     @Override
     public String getLeafValue() {
         return this.value + "";
-    }
-
-    public static BooleanJSONLeaf of(boolean value){
-        return new BooleanJSONLeaf(value);
     }
 }
