@@ -27,7 +27,7 @@ dependencies {
 
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
     implementation("com.google.guava:guava:31.1-jre")
-    testImplementation("org.json:json:20231013")
+    implementation("org.json:json:20231013")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -47,7 +47,7 @@ publishing {
         create<MavenPublication>("maven") {
             groupId = "org.makechtec.software"
             artifactId = "json_tree"
-            version = "2.0.1"
+            version = "3.0.0"
 
             from(components["java"])
         }

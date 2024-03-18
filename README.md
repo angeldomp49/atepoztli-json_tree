@@ -47,3 +47,5 @@ Examples:
         assertEquals("Jhon", obj.getJSONObject(0).getString("name"));
         assertEquals(1, obj.getJSONObject(0).getInt("id"));
         assertFalse(obj.getJSONObject(0).getBoolean("hasPassed"));
+
+### Validation ###
