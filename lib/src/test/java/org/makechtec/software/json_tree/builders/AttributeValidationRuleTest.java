@@ -30,7 +30,7 @@ public class AttributeValidationRuleTest {
     }
 
     @Test
-    public void testValidationTypeWrong() throws AttributeValidationException {
+    public void testValidationTypeWrong() {
         var validator = AttributeValidationRule.builder()
                 .key("accountId")
                 .expectedType(AttributeExpectedType.TYPE_NUMBER)
@@ -42,16 +42,14 @@ public class AttributeValidationRuleTest {
                 }
                 """;
 
-        var exception = assertThrows(AttributeValidationException.class, () -> {
-            validator.applyTo(json2);
-        });
+        var exception = assertThrows(AttributeValidationException.class, () -> validator.applyTo(json2));
 
         assertEquals(exception.getType(), AttributeValidationExceptionType.IS_WRONG_TYPE);
 
     }
 
     @Test
-    public void testValidationIsPresent() throws AttributeValidationException {
+    public void testValidationIsPresent() {
         var validator = AttributeValidationRule.builder()
                 .key("accountId")
                 .expectedType(AttributeExpectedType.TYPE_NUMBER)
@@ -64,16 +62,14 @@ public class AttributeValidationRuleTest {
                 }
                 """;
 
-        var exception = assertThrows(AttributeValidationException.class, () -> {
-            validator.applyTo(json2);
-        });
+        var exception = assertThrows(AttributeValidationException.class, () -> validator.applyTo(json2));
 
         assertEquals(exception.getType(), AttributeValidationExceptionType.IS_NOT_PRESENT);
 
     }
 
     @Test
-    public void testValidationIsNull() throws AttributeValidationException {
+    public void testValidationIsNull() {
         var validator = AttributeValidationRule.builder()
                 .key("contactId")
                 .expectedType(AttributeExpectedType.TYPE_NUMBER)
@@ -86,16 +82,14 @@ public class AttributeValidationRuleTest {
                 }
                 """;
 
-        var exception = assertThrows(AttributeValidationException.class, () -> {
-            validator.applyTo(json2);
-        });
+        var exception = assertThrows(AttributeValidationException.class, () -> validator.applyTo(json2));
 
         assertEquals(exception.getType(), AttributeValidationExceptionType.IS_NULL);
 
     }
 
     @Test
-    public void testValidationIsForbiddenValue() throws AttributeValidationException {
+    public void testValidationIsForbiddenValue() {
         var validator = AttributeValidationRule.builder()
                 .key("contactId")
                 .expectedType(AttributeExpectedType.TYPE_NUMBER)
@@ -108,9 +102,7 @@ public class AttributeValidationRuleTest {
                 }
                 """;
 
-        var exception = assertThrows(AttributeValidationException.class, () -> {
-            validator.applyTo(json2);
-        });
+        var exception = assertThrows(AttributeValidationException.class, () -> validator.applyTo(json2));
 
         assertEquals(exception.getType(), AttributeValidationExceptionType.IS_FORBIDDEN_VALUE);
 

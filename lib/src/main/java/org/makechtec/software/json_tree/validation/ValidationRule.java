@@ -5,6 +5,6 @@ import org.makechtec.software.json_tree.validation.attribute.AttributeValidation
 
 public interface ValidationRule {
 
-    public void applyTo(String json) throws AttributeValidationException, JSONException;
+    void applyTo(String json) throws AttributeValidationException, JSONException;
 
 }

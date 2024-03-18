@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class TreeValidationRuleTest {
 
     @Test
-    void validateIsNotPresent() throws AttributeValidationException {
+    void validateIsNotPresent() {
 
         var treeRule =
                 TreeValidationRule.builder()
@@ -73,7 +73,7 @@ class TreeValidationRuleTest {
     }
 
     @Test
-    void validateIsNull() throws AttributeValidationException {
+    void validateIsNull() {
 
         var treeRule =
                 TreeValidationRule.builder()
@@ -135,7 +135,7 @@ class TreeValidationRuleTest {
     }
 
     @Test
-    void validateIsWrongType() throws AttributeValidationException {
+    void validateIsWrongType() {
 
         var treeRule =
                 TreeValidationRule.builder()

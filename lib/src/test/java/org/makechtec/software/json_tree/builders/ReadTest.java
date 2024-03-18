@@ -65,7 +65,7 @@ public class ReadTest {
 
         var obj = inputObject.getBoolean("withNull");
 
-        //System.out.println(obj);
+        System.out.println(obj);
 
     }
 
@@ -86,6 +86,8 @@ public class ReadTest {
 
 
         var obj = inputObject.getJSONObject("message");
+
+        System.out.println(obj);
 
     }
 
