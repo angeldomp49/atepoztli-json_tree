@@ -1,9 +1,13 @@
 package org.makechtec.software.json_tree.builders;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ReadTest {
 
@@ -43,7 +47,7 @@ public class ReadTest {
 
         var inputObject = new JSONObject(input);
 
-        inputObject.get("unexisting");
+        assertThrows(JSONException.class, () -> inputObject.get("unexisting"));
 
     }
 
@@ -63,13 +67,13 @@ public class ReadTest {
         var inputObject = new JSONObject(input);
 
 
-        var obj = inputObject.getBoolean("withNull");
+        var obj = inputObject.getBigDecimal("withNull");
 
-        System.out.println(obj);
+        assertEquals(BigDecimal.valueOf(500.1), obj);
 
     }
 
-    @Test
+    @Test()
     public void testReadingObject() {
 
         var input = """
@@ -84,10 +88,7 @@ public class ReadTest {
 
         var inputObject = new JSONObject(input);
 
-
-        var obj = inputObject.getJSONObject("message");
-
-        System.out.println(obj);
+        assertThrows(JSONException.class, () -> inputObject.getJSONObject("message"));
 
     }
 
