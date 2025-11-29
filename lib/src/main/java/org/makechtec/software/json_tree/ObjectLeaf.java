@@ -1,14 +1,9 @@
 package org.makechtec.software.json_tree;
 
+import java.util.Collections;
 import java.util.Map;
 
-public class ObjectLeaf implements JSONLeaf {
-
-    private final Map<String, JSONLeaf> leafs;
-
-    public ObjectLeaf(Map<String, JSONLeaf> leafs) {
-        this.leafs = leafs;
-    }
+public record ObjectLeaf(Map<String, JSONLeaf> leafs) implements JSONLeaf {
 
     @Override
     public String getLeafValue() {
@@ -32,6 +27,10 @@ public class ObjectLeaf implements JSONLeaf {
         responseBuilder.append('}');
 
         return responseBuilder.toString();
+    }
+    
+    public Map<String, JSONLeaf> leafs() {
+        return Collections.unmodifiableMap(leafs);
     }
 
 }
