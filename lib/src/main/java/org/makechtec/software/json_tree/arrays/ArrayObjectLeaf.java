@@ -3,6 +3,7 @@ package org.makechtec.software.json_tree.arrays;
 import org.makechtec.software.json_tree.JSONIndexKeyLeaf;
 import org.makechtec.software.json_tree.JSONLeaf;
 import org.makechtec.software.json_tree.ObjectLeaf;
+import org.makechtec.software.json_tree.validation.LeafContent;
 
 import java.util.List;
 import java.util.Optional;
@@ -41,6 +42,11 @@ public class ArrayObjectLeaf implements JSONIndexKeyLeaf {
                 this.values
                         .stream()
                         .allMatch(JSONLeaf::isEmpty);
+    }
+
+    @Override
+    public LeafContent getLeafContent() {
+        return LeafContent.ARRAY_LEAF;
     }
 
     @Override

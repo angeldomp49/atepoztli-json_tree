@@ -1,6 +1,8 @@
 package org.makechtec.software.json_tree.arrays;
 
 import org.makechtec.software.json_tree.JSONIndexKeyLeaf;
+import org.makechtec.software.json_tree.primitives.BooleanJSONLeaf;
+import org.makechtec.software.json_tree.validation.LeafContent;
 
 import java.util.List;
 import java.util.Optional;
@@ -37,8 +39,15 @@ public class ArrayBooleanLeaf implements JSONIndexKeyLeaf {
     }
 
     @Override
+    public LeafContent getLeafContent() {
+        return LeafContent.ARRAY_LEAF;
+    }
+
+    @Override
     public <T> Optional<T> asLeaf(int key, Class<T> type) {
-        return Optional.of(type.cast(values.get(key)));
+        var wrapper = new BooleanJSONLeaf(values.get(key));
+        
+        return Optional.of(type.cast(wrapper));
     }
 
 }

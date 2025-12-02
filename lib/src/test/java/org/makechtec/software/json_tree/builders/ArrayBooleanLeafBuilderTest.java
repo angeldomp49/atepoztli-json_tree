@@ -2,6 +2,7 @@ package org.makechtec.software.json_tree.builders;
 
 import org.json.JSONArray;
 import org.junit.jupiter.api.Test;
+import org.makechtec.software.json_tree.primitives.BooleanJSONLeaf;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -39,19 +40,19 @@ class ArrayBooleanLeafBuilderTest {
                 .build();
 
         // When
-        var result0 = arrayLeaf.asLeaf(0, Boolean.class);
-        var result1 = arrayLeaf.asLeaf(1, Boolean.class);
-        var result2 = arrayLeaf.asLeaf(2, Boolean.class);
+        var result0 = arrayLeaf.asLeaf(0, BooleanJSONLeaf.class);
+        var result1 = arrayLeaf.asLeaf(1, BooleanJSONLeaf.class);
+        var result2 = arrayLeaf.asLeaf(2, BooleanJSONLeaf.class);
 
         // Then
         assertTrue(result0.isPresent());
-        assertEquals(true, result0.get());
+        assertEquals("true", result0.get().getLeafValue());
 
         assertTrue(result1.isPresent());
-        assertEquals(false, result1.get());
+        assertEquals("false", result1.get().getLeafValue());
 
         assertTrue(result2.isPresent());
-        assertEquals(true, result2.get());
+        assertEquals("true", result2.get().getLeafValue());
     }
 
     @Test
@@ -63,7 +64,7 @@ class ArrayBooleanLeafBuilderTest {
 
         // When/Then
         assertThrows(IndexOutOfBoundsException.class, () ->
-                arrayLeaf.asLeaf(5, Boolean.class));
+                arrayLeaf.asLeaf(5, BooleanJSONLeaf.class));
     }
 
     @Test

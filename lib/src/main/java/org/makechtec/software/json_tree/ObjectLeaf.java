@@ -1,5 +1,7 @@
 package org.makechtec.software.json_tree;
 
+import org.makechtec.software.json_tree.validation.LeafContent;
+
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
@@ -39,6 +41,11 @@ public record ObjectLeaf(Map<String, JSONLeaf> leafs) implements JSONStringKeyLe
                         .values()
                         .stream()
                         .allMatch(JSONLeaf::isEmpty);
+    }
+
+    @Override
+    public LeafContent getLeafContent() {
+        return LeafContent.OBJECT_LEAF;
     }
 
     @Override

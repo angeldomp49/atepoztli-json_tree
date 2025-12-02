@@ -1,6 +1,7 @@
 package org.makechtec.software.json_tree.primitives;
 
 import org.makechtec.software.json_tree.JSONLeaf;
+import org.makechtec.software.json_tree.validation.LeafContent;
 
 public class BooleanJSONLeaf implements JSONLeaf {
 
@@ -22,5 +23,10 @@ public class BooleanJSONLeaf implements JSONLeaf {
     @Override
     public boolean isEmpty() {
         return false;
+    }
+
+    @Override
+    public LeafContent getLeafContent() {
+        return LeafContent.BOOLEAN_LEAF;
     }
 }

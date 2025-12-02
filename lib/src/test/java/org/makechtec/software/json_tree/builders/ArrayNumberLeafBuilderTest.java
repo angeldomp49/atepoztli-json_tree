@@ -2,6 +2,7 @@ package org.makechtec.software.json_tree.builders;
 
 import org.json.JSONArray;
 import org.junit.jupiter.api.Test;
+import org.makechtec.software.json_tree.primitives.NumberJSONLeaf;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -39,19 +40,19 @@ class ArrayNumberLeafBuilderTest {
                 .build();
 
         // When
-        var result0 = arrayLeaf.asLeaf(0, Number.class);
-        var result1 = arrayLeaf.asLeaf(1, Number.class);
-        var result2 = arrayLeaf.asLeaf(2, Number.class);
+        var result0 = arrayLeaf.asLeaf(0, NumberJSONLeaf.class);
+        var result1 = arrayLeaf.asLeaf(1, NumberJSONLeaf.class);
+        var result2 = arrayLeaf.asLeaf(2, NumberJSONLeaf.class);
 
         // Then
         assertTrue(result0.isPresent());
-        assertEquals(42, result0.get());
+        assertEquals("42", result0.get().getLeafValue());
 
         assertTrue(result1.isPresent());
-        assertEquals(3.14, result1.get());
+        assertEquals("3.14", result1.get().getLeafValue());
 
         assertTrue(result2.isPresent());
-        assertEquals(100L, result2.get());
+        assertEquals("100", result2.get().getLeafValue());
     }
 
     @Test
@@ -63,12 +64,11 @@ class ArrayNumberLeafBuilderTest {
                 .build();
 
         // When
-        var result = arrayLeaf.asLeaf(0, Integer.class);
+        var result = arrayLeaf.asLeaf(0, NumberJSONLeaf.class);
 
         // Then
         assertTrue(result.isPresent());
-        assertEquals(42, result.get());
-        assertTrue(result.get() instanceof Integer);
+        assertEquals("42", result.get().getLeafValue());
     }
 
     @Test
@@ -80,12 +80,11 @@ class ArrayNumberLeafBuilderTest {
                 .build();
 
         // When
-        var result = arrayLeaf.asLeaf(1, Double.class);
+        var result = arrayLeaf.asLeaf(1, NumberJSONLeaf.class);
 
         // Then
         assertTrue(result.isPresent());
-        assertEquals(2.71828, result.get());
-        assertTrue(result.get() instanceof Double);
+        assertEquals("2.71828", result.get().getLeafValue());
     }
 
     @Test
@@ -98,7 +97,7 @@ class ArrayNumberLeafBuilderTest {
 
         // When/Then
         assertThrows(IndexOutOfBoundsException.class, () ->
-                arrayLeaf.asLeaf(10, Number.class));
+                arrayLeaf.asLeaf(10, NumberJSONLeaf.class));
     }
 
     @Test

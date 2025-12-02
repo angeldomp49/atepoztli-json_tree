@@ -2,6 +2,7 @@ package org.makechtec.software.json_tree.builders;
 
 import org.json.JSONArray;
 import org.junit.jupiter.api.Test;
+import org.makechtec.software.json_tree.primitives.StringJSONLeaf;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -39,19 +40,19 @@ class ArrayStringLeafBuilderTest {
                 .build();
 
         // When
-        var result0 = arrayLeaf.asLeaf(0, String.class);
-        var result1 = arrayLeaf.asLeaf(1, String.class);
-        var result2 = arrayLeaf.asLeaf(2, String.class);
+        var result0 = arrayLeaf.asLeaf(0, StringJSONLeaf.class);
+        var result1 = arrayLeaf.asLeaf(1, StringJSONLeaf.class);
+        var result2 = arrayLeaf.asLeaf(2, StringJSONLeaf.class);
 
         // Then
         assertTrue(result0.isPresent());
-        assertEquals("Hello", result0.get());
+        assertEquals("\"Hello\"", result0.get().getLeafValue());
 
         assertTrue(result1.isPresent());
-        assertEquals("World", result1.get());
+        assertEquals("\"World\"", result1.get().getLeafValue());
 
         assertTrue(result2.isPresent());
-        assertEquals("Test", result2.get());
+        assertEquals("\"Test\"", result2.get().getLeafValue());
     }
 
     @Test
@@ -63,11 +64,11 @@ class ArrayStringLeafBuilderTest {
                 .build();
 
         // When
-        var result = arrayLeaf.asLeaf(0, String.class);
+        var result = arrayLeaf.asLeaf(0, StringJSONLeaf.class);
 
         // Then
         assertTrue(result.isPresent());
-        assertEquals("", result.get());
+        assertEquals("\"\"", result.get().getLeafValue());
     }
 
     @Test
@@ -79,7 +80,7 @@ class ArrayStringLeafBuilderTest {
 
         // When/Then
         assertThrows(IndexOutOfBoundsException.class, () ->
-                arrayLeaf.asLeaf(5, String.class));
+                arrayLeaf.asLeaf(5, StringJSONLeaf.class));
     }
 
     @Test
