@@ -1,6 +1,6 @@
 package org.makechtec.software.json_tree;
 
-import org.makechtec.software.json_tree.validation.LeafContent;
+import org.makechtec.software.json_tree.validation.LeafContentType;
 
 public interface JSONLeaf {
     
@@ -8,7 +8,7 @@ public interface JSONLeaf {
 
     boolean isEmpty();
 
-    LeafContent getLeafContent();
+    LeafContentType getLeafContentType();
     
     
 

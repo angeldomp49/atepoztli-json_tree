@@ -1,7 +1,7 @@
 package org.makechtec.software.json_tree.primitives;
 
 import org.makechtec.software.json_tree.JSONLeaf;
-import org.makechtec.software.json_tree.validation.LeafContent;
+import org.makechtec.software.json_tree.validation.LeafContentType;
 
 public class NumberJSONLeaf implements JSONLeaf {
 
@@ -26,7 +26,7 @@ public class NumberJSONLeaf implements JSONLeaf {
     }
 
     @Override
-    public LeafContent getLeafContent() {
-        return LeafContent.NUMBER_LEAF;
+    public LeafContentType getLeafContentType() {
+        return LeafContentType.NUMBER_LEAF;
     }
 }

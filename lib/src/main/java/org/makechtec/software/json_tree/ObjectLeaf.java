@@ -1,6 +1,6 @@
 package org.makechtec.software.json_tree;
 
-import org.makechtec.software.json_tree.validation.LeafContent;
+import org.makechtec.software.json_tree.validation.LeafContentType;
 
 import java.util.Collections;
 import java.util.Map;
@@ -44,13 +44,13 @@ public record ObjectLeaf(Map<String, JSONLeaf> leafs) implements JSONStringKeyLe
     }
 
     @Override
-    public LeafContent getLeafContent() {
-        return LeafContent.OBJECT_LEAF;
+    public LeafContentType getLeafContentType() {
+        return LeafContentType.OBJECT_LEAF;
     }
 
     @Override
-    public <T> Optional<T> asLeaf(String key, Class<T> type) {
-        return Optional.of(type.cast(this.leafs().get(key)));
+    public Optional<JSONLeaf> asLeaf(String key) {
+        return Optional.of(leafs.get(key));
     }
 
     public Map<String, JSONLeaf> leafs() {

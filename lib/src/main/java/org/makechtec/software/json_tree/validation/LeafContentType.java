@@ -1,6 +1,6 @@
 package org.makechtec.software.json_tree.validation;
 
-public enum LeafContent {
+public enum LeafContentType {
 
     OBJECT_LEAF,
     ARRAY_LEAF,

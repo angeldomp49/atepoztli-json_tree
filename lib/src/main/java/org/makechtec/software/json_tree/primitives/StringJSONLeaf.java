@@ -1,7 +1,7 @@
 package org.makechtec.software.json_tree.primitives;
 
 import org.makechtec.software.json_tree.JSONLeaf;
-import org.makechtec.software.json_tree.validation.LeafContent;
+import org.makechtec.software.json_tree.validation.LeafContentType;
 
 import java.util.Objects;
 
@@ -28,7 +28,7 @@ public class StringJSONLeaf implements JSONLeaf {
     }
 
     @Override
-    public LeafContent getLeafContent() {
-        return LeafContent.STRING_LEAF;
+    public LeafContentType getLeafContentType() {
+        return LeafContentType.STRING_LEAF;
     }
 }
