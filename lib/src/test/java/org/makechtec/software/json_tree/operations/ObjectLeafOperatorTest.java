@@ -5,6 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.makechtec.software.json_tree.ObjectLeaf;
 import org.makechtec.software.json_tree.builders.ObjectLeafBuilder;
+import org.makechtec.software.json_tree.primitives.BooleanJSONLeaf;
+import org.makechtec.software.json_tree.primitives.NumberJSONLeaf;
+import org.makechtec.software.json_tree.primitives.StringJSONLeaf;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -174,4 +177,61 @@ class ObjectLeafOperatorTest {
         assertTrue(json.getBoolean("booleanField"));
         assertEquals(3.14, json.getDouble("decimalField"), 0.001);
     }
+
+    @Test
+    void asLeaf_shouldRetrieveFieldFromMergedObjectLeaf() {
+        // Given
+        ObjectLeaf leaf1 = ObjectLeafBuilder.builder()
+                .put("id", 1)
+                .put("name", "Alice")
+                .build();
+
+        ObjectLeaf leaf2 = ObjectLeafBuilder.builder()
+                .put("age", 25)
+                .put("active", true)
+                .build();
+
+        ObjectLeaf merged = operator.merge(leaf1, leaf2);
+
+        // When
+        var nameResult = merged.asLeaf("name", StringJSONLeaf.class);
+        var idResult = merged.asLeaf("id", NumberJSONLeaf.class);
+        var ageResult = merged.asLeaf("age", NumberJSONLeaf.class);
+        var activeResult = merged.asLeaf("active", BooleanJSONLeaf.class);
+
+        // Then
+        assertTrue(nameResult.isPresent());
+        assertEquals("\"Alice\"", nameResult.get().getLeafValue());
+
+        assertTrue(idResult.isPresent());
+        assertEquals("1", idResult.get().getLeafValue());
+
+        assertTrue(ageResult.isPresent());
+        assertEquals("25", ageResult.get().getLeafValue());
+
+        assertTrue(activeResult.isPresent());
+        assertEquals("true", activeResult.get().getLeafValue());
+    }
+
+    @Test
+    void asLeaf_shouldRetrieveOverwrittenFieldValue() {
+        // Given
+        ObjectLeaf leaf1 = ObjectLeafBuilder.builder()
+                .put("status", "pending")
+                .build();
+
+        ObjectLeaf leaf2 = ObjectLeafBuilder.builder()
+                .put("status", "approved")
+                .build();
+
+        ObjectLeaf merged = operator.merge(leaf1, leaf2);
+
+        // When
+        var statusResult = merged.asLeaf("status", StringJSONLeaf.class);
+
+        // Then
+        assertTrue(statusResult.isPresent());
+        assertEquals("\"approved\"", statusResult.get().getLeafValue());
+    }
 }
+
