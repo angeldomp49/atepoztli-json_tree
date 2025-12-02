@@ -50,8 +50,8 @@ public class ArrayObjectLeaf implements JSONIndexKeyLeaf {
     }
 
     @Override
-    public <T> Optional<T> asLeaf(int key, Class<T> type) {
-        return Optional.of(type.cast(values.get(key)));
+    public Optional<JSONLeaf> asLeaf(int key) {
+        return Optional.of(values.get(key));
     }
 
 }

@@ -1,6 +1,7 @@
 package org.makechtec.software.json_tree.arrays;
 
 import org.makechtec.software.json_tree.JSONIndexKeyLeaf;
+import org.makechtec.software.json_tree.JSONLeaf;
 import org.makechtec.software.json_tree.primitives.StringJSONLeaf;
 import org.makechtec.software.json_tree.validation.LeafContent;
 
@@ -48,9 +49,9 @@ public class ArrayStringLeaf implements JSONIndexKeyLeaf {
     }
 
     @Override
-    public <T> Optional<T> asLeaf(int key, Class<T> type) {
+    public Optional<JSONLeaf> asLeaf(int key) {
         var wrapper = new StringJSONLeaf(values.get(key));
 
-        return Optional.of(type.cast(wrapper));
+        return Optional.of(wrapper);
     }
 }
