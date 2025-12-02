@@ -2,6 +2,8 @@ package org.makechtec.software.json_tree.primitives;
 
 import org.makechtec.software.json_tree.JSONLeaf;
 
+import java.util.Objects;
+
 public class StringJSONLeaf implements JSONLeaf {
 
     private final String value;
@@ -17,5 +19,10 @@ public class StringJSONLeaf implements JSONLeaf {
     @Override
     public String getLeafValue() {
         return "\"" + this.value + "\"";
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return Objects.isNull(value) || value.isEmpty();
     }
 }

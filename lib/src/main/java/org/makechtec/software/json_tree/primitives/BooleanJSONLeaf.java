@@ -18,4 +18,9 @@ public class BooleanJSONLeaf implements JSONLeaf {
     public String getLeafValue() {
         return this.value + "";
     }
+
+    @Override
+    public boolean isEmpty() {
+        return false;
+    }
 }

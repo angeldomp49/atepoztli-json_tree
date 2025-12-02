@@ -2,12 +2,12 @@ package org.makechtec.software.json_tree.builders;
 
 import org.makechtec.software.json_tree.arrays.ArrayNumberLeaf;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ArrayNumberLeafBuilder {
 
-    private final Set<Number> items = new HashSet<>();
+    private final List<Number> items = new ArrayList<>();
 
     private ArrayNumberLeafBuilder() {
     }

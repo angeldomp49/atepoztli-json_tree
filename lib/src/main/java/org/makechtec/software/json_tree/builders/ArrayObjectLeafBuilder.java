@@ -3,12 +3,12 @@ package org.makechtec.software.json_tree.builders;
 import org.makechtec.software.json_tree.ObjectLeaf;
 import org.makechtec.software.json_tree.arrays.ArrayObjectLeaf;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ArrayObjectLeafBuilder {
 
-    private final Set<ObjectLeaf> items = new HashSet<>();
+    private final List<ObjectLeaf> items = new ArrayList<>();
 
     private ArrayObjectLeafBuilder() {
     }

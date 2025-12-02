@@ -1,14 +1,15 @@
 package org.makechtec.software.json_tree.arrays;
 
-import org.makechtec.software.json_tree.JSONLeaf;
+import org.makechtec.software.json_tree.JSONIndexKeyLeaf;
 
-import java.util.Set;
+import java.util.List;
+import java.util.Optional;
 
-public class ArrayNumberLeaf implements JSONLeaf {
+public class ArrayNumberLeaf implements JSONIndexKeyLeaf {
 
-    private final Set<Number> values;
+    private final List<Number> values;
 
-    public ArrayNumberLeaf(Set<Number> values) {
+    public ArrayNumberLeaf(List<Number> values) {
         this.values = values;
     }
 
@@ -30,4 +31,13 @@ public class ArrayNumberLeaf implements JSONLeaf {
         return responseBuilder.toString();
     }
 
+    @Override
+    public boolean isEmpty() {
+        return values.isEmpty();
+    }
+
+    @Override
+    public <T> Optional<T> asLeaf(int key, Class<T> type) {
+        return Optional.of(type.cast(values.get(key)));
+    }
 }

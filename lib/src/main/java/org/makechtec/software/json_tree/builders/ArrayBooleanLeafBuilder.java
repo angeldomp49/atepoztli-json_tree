@@ -2,12 +2,12 @@ package org.makechtec.software.json_tree.builders;
 
 import org.makechtec.software.json_tree.arrays.ArrayBooleanLeaf;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ArrayBooleanLeafBuilder {
 
-    private final Set<Boolean> items = new HashSet<>();
+    private final List<Boolean> items = new ArrayList<>();
 
     private ArrayBooleanLeafBuilder() {
     }

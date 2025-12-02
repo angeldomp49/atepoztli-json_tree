@@ -1,14 +1,15 @@
 package org.makechtec.software.json_tree.arrays;
 
-import org.makechtec.software.json_tree.JSONLeaf;
+import org.makechtec.software.json_tree.JSONIndexKeyLeaf;
 
-import java.util.Set;
+import java.util.List;
+import java.util.Optional;
 
-public class ArrayBooleanLeaf implements JSONLeaf {
+public class ArrayBooleanLeaf implements JSONIndexKeyLeaf {
 
-    private final Set<Boolean> values;
+    private final List<Boolean> values;
 
-    public ArrayBooleanLeaf(Set<Boolean> values) {
+    public ArrayBooleanLeaf(List<Boolean> values) {
         this.values = values;
     }
 
@@ -28,6 +29,16 @@ public class ArrayBooleanLeaf implements JSONLeaf {
         responseBuilder.append(']');
 
         return responseBuilder.toString();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return values.isEmpty();
+    }
+
+    @Override
+    public <T> Optional<T> asLeaf(int key, Class<T> type) {
+        return Optional.of(type.cast(values.get(key)));
     }
 
 }
