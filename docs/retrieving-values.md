@@ -1,7 +1,7 @@
 # Value Retrieval
 
 The `JSONLeaf` interface has two specialized child interfaces for value retrieval: `JSONStringKeyLeaf` and
-`JSONIndexKeyLeaf`. These interfaces provide a convenient `asLeaf` method to access nested values in a type-safe manner.
+`JSONIndexKeyLeaf`. These interfaces provide a convenient `asLeaf` method to access nested values with automatic type wrapping.
 
 ---
 
@@ -13,8 +13,7 @@ The `JSONLeaf` interface has two specialized child interfaces for value retrieva
 
 #### Usage
 
-The `asLeaf(String key, Class<T> type)` method returns an `Optional<T>` containing the value if the key exists and the
-type matches.
+The `asLeaf(String key)` method returns an `Optional<JSONLeaf>` containing the value wrapped in the appropriate leaf type if the key exists.
 
 #### Examples
 
@@ -23,9 +22,6 @@ Here is an example of how to retrieve different primitive types from an `ObjectL
 ```java
 import org.junit.jupiter.api.Test;
 import org.makechtec.software.json_tree.builders.ObjectLeafBuilder;
-import org.makechtec.software.json_tree.primitives.BooleanJSONLeaf;
-import org.makechtec.software.json_tree.primitives.NumberJSONLeaf;
-import org.makechtec.software.json_tree.primitives.StringJSONLeaf;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -40,9 +36,9 @@ class ObjectLeafRetrievalTest {
                 .put("isStudent", false)
                 .build();
 
-        var nameLeaf = objectLeaf.asLeaf("name", StringJSONLeaf.class);
-        var ageLeaf = objectLeaf.asLeaf("age", NumberJSONLeaf.class);
-        var isStudentLeaf = objectLeaf.asLeaf("isStudent", BooleanJSONLeaf.class);
+        var nameLeaf = objectLeaf.asLeaf("name");
+        var ageLeaf = objectLeaf.asLeaf("age");
+        var isStudentLeaf = objectLeaf.asLeaf("isStudent");
 
         assertTrue(nameLeaf.isPresent());
         assertEquals("\"John Doe\"", nameLeaf.get().getLeafValue());
@@ -63,9 +59,7 @@ Array-based leaves like `ArrayStringLeaf`, `ArrayNumberLeaf`, `ArrayBooleanLeaf`
 
 #### Usage
 
-The `asLeaf(int index, Class<T> type)` method returns an `Optional<T>` containing the value if the index is valid and
-the type is correct. For primitive types, this will be a wrapper class like `StringJSONLeaf`, `NumberJSONLeaf`, or
-`BooleanJSONLeaf`.
+The `asLeaf(int index)` method returns an `Optional<JSONLeaf>` containing the value wrapped in the appropriate leaf type if the index is valid.
 
 #### Examples
 
@@ -76,7 +70,6 @@ Here are examples of retrieving values from different types of array leaves:
 ```java
 import org.junit.jupiter.api.Test;
 import org.makechtec.software.json_tree.builders.ArrayStringLeafBuilder;
-import org.makechtec.software.json_tree.primitives.StringJSONLeaf;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -91,7 +84,7 @@ class ArrayStringLeafRetrievalTest {
                 .add("Cherry")
                 .build();
 
-        var fruitLeaf = arrayLeaf.asLeaf(1, StringJSONLeaf.class);
+        var fruitLeaf = arrayLeaf.asLeaf(1);
 
         assertTrue(fruitLeaf.isPresent());
         assertEquals("\"Banana\"", fruitLeaf.get().getLeafValue());
@@ -104,7 +97,6 @@ class ArrayStringLeafRetrievalTest {
 ```java
 import org.junit.jupiter.api.Test;
 import org.makechtec.software.json_tree.builders.ArrayNumberLeafBuilder;
-import org.makechtec.software.json_tree.primitives.NumberJSONLeaf;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -119,7 +111,7 @@ class ArrayNumberLeafRetrievalTest {
                 .add(30L)
                 .build();
 
-        var numberLeaf = arrayLeaf.asLeaf(1, NumberJSONLeaf.class);
+        var numberLeaf = arrayLeaf.asLeaf(1);
 
         assertTrue(numberLeaf.isPresent());
         assertEquals("20.5", numberLeaf.get().getLeafValue());
@@ -132,7 +124,6 @@ class ArrayNumberLeafRetrievalTest {
 ```java
 import org.junit.jupiter.api.Test;
 import org.makechtec.software.json_tree.builders.ArrayBooleanLeafBuilder;
-import org.makechtec.software.json_tree.primitives.BooleanJSONLeaf;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -147,7 +138,7 @@ class ArrayBooleanLeafRetrievalTest {
                 .add(true)
                 .build();
 
-        var booleanLeaf = arrayLeaf.asLeaf(1, BooleanJSONLeaf.class);
+        var booleanLeaf = arrayLeaf.asLeaf(1);
 
         assertTrue(booleanLeaf.isPresent());
         assertEquals("false", booleanLeaf.get().getLeafValue());
@@ -165,7 +156,7 @@ class ArrayBooleanLeafRetrievalTest {
 
 #### Uso
 
-El método `asLeaf(String key, Class<T> type)` devuelve un `Optional<T>` que contiene el valor si la clave existe y el
+El método `asLeaf(String key)` devuelve un `Optional<JSONLeaf>` que contiene el valor si la clave existe y el
 tipo coincide.
 
 #### Ejemplos
@@ -175,9 +166,6 @@ A continuación, se muestra un ejemplo de cómo recuperar diferentes tipos primi
 ```java
 import org.junit.jupiter.api.Test;
 import org.makechtec.software.json_tree.builders.ObjectLeafBuilder;
-import org.makechtec.software.json_tree.primitives.BooleanJSONLeaf;
-import org.makechtec.software.json_tree.primitives.NumberJSONLeaf;
-import org.makechtec.software.json_tree.primitives.StringJSONLeaf;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -192,9 +180,9 @@ class ObjectLeafRetrievalTest {
                 .put("isStudent", false)
                 .build();
 
-        var nameLeaf = objectLeaf.asLeaf("name", StringJSONLeaf.class);
-        var ageLeaf = objectLeaf.asLeaf("age", NumberJSONLeaf.class);
-        var isStudentLeaf = objectLeaf.asLeaf("isStudent", BooleanJSONLeaf.class);
+        var nameLeaf = objectLeaf.asLeaf("name");
+        var ageLeaf = objectLeaf.asLeaf("age");
+        var isStudentLeaf = objectLeaf.asLeaf("isStudent");
 
         assertTrue(nameLeaf.isPresent());
         assertEquals("\"John Doe\"", nameLeaf.get().getLeafValue());
@@ -215,9 +203,8 @@ implementan `JSONIndexKeyLeaf`. Esto permite recuperar valores por su índice nu
 
 #### Uso
 
-El método `asLeaf(int index, Class<T> type)` devuelve un `Optional<T>` que contiene el valor si el índice es válido y el
+El método `asLeaf(int index)` devuelve un `Optional<JSONLeaf>` que contiene el valor si el índice es válido y el
 tipo es correcto. Para tipos primitivos, este será una clase contenedora como `StringJSONLeaf`, `NumberJSONLeaf` o
-`BooleanJSONLeaf`.
 
 #### Ejemplos
 
@@ -228,7 +215,6 @@ A continuación, se muestran ejemplos de cómo recuperar valores desde diferente
 ```java
 import org.junit.jupiter.api.Test;
 import org.makechtec.software.json_tree.builders.ArrayStringLeafBuilder;
-import org.makechtec.software.json_tree.primitives.StringJSONLeaf;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -243,7 +229,7 @@ class ArrayStringLeafRetrievalTest {
                 .add("Cereza")
                 .build();
 
-        var fruitLeaf = arrayLeaf.asLeaf(1, StringJSONLeaf.class);
+        var fruitLeaf = arrayLeaf.asLeaf(1);
 
         assertTrue(fruitLeaf.isPresent());
         assertEquals("\"Banana\"", fruitLeaf.get().getLeafValue());
@@ -256,7 +242,6 @@ class ArrayStringLeafRetrievalTest {
 ```java
 import org.junit.jupiter.api.Test;
 import org.makechtec.software.json_tree.builders.ArrayNumberLeafBuilder;
-import org.makechtec.software.json_tree.primitives.NumberJSONLeaf;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -271,7 +256,7 @@ class ArrayNumberLeafRetrievalTest {
                 .add(30L)
                 .build();
 
-        var numberLeaf = arrayLeaf.asLeaf(1, NumberJSONLeaf.class);
+        var numberLeaf = arrayLeaf.asLeaf(1);
 
         assertTrue(numberLeaf.isPresent());
         assertEquals("20.5", numberLeaf.get().getLeafValue());
@@ -284,7 +269,6 @@ class ArrayNumberLeafRetrievalTest {
 ```java
 import org.junit.jupiter.api.Test;
 import org.makechtec.software.json_tree.builders.ArrayBooleanLeafBuilder;
-import org.makechtec.software.json_tree.primitives.BooleanJSONLeaf;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -299,7 +283,7 @@ class ArrayBooleanLeafRetrievalTest {
                 .add(true)
                 .build();
 
-        var booleanLeaf = arrayLeaf.asLeaf(1, BooleanJSONLeaf.class);
+        var booleanLeaf = arrayLeaf.asLeaf(1);
 
         assertTrue(booleanLeaf.isPresent());
         assertEquals("false", booleanLeaf.get().getLeafValue());
@@ -317,7 +301,7 @@ class ArrayBooleanLeafRetrievalTest {
 
 #### Utilisation
 
-La méthode `asLeaf(String key, Class<T> type)` renvoie un `Optional<T>` contenant la valeur si la clé existe et que le
+La méthode `asLeaf(String key)` renvoie un `Optional<JSONLeaf>` contenant la valeur si la clé existe et que le
 type correspond.
 
 #### Exemples
@@ -327,9 +311,6 @@ Voici un exemple de récupération de différents types primitifs à partir d'un
 ```java
 import org.junit.jupiter.api.Test;
 import org.makechtec.software.json_tree.builders.ObjectLeafBuilder;
-import org.makechtec.software.json_tree.primitives.BooleanJSONLeaf;
-import org.makechtec.software.json_tree.primitives.NumberJSONLeaf;
-import org.makechtec.software.json_tree.primitives.StringJSONLeaf;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -344,9 +325,9 @@ class ObjectLeafRetrievalTest {
                 .put("isStudent", false)
                 .build();
 
-        var nameLeaf = objectLeaf.asLeaf("name", StringJSONLeaf.class);
-        var ageLeaf = objectLeaf.asLeaf("age", NumberJSONLeaf.class);
-        var isStudentLeaf = objectLeaf.asLeaf("isStudent", BooleanJSONLeaf.class);
+        var nameLeaf = objectLeaf.asLeaf("name");
+        var ageLeaf = objectLeaf.asLeaf("age");
+        var isStudentLeaf = objectLeaf.asLeaf("isStudent");
 
         assertTrue(nameLeaf.isPresent());
         assertEquals("\"John Doe\"", nameLeaf.get().getLeafValue());
@@ -367,7 +348,7 @@ implémentent `JSONIndexKeyLeaf`. Cela permet de récupérer des valeurs par leu
 
 #### Utilisation
 
-La méthode `asLeaf(int index, Class<T> type)` renvoie un `Optional<T>` contenant la valeur si l'index est valide et que
+La méthode `asLeaf(int index)` renvoie un `Optional<JSONLeaf>` contenant la valeur si l'index est valide et que
 le type est correct. Pour les types primitifs, ce sera une classe d'emballage comme `StringJSONLeaf`, `NumberJSONLeaf`
 ou `BooleanJSONLeaf`.
 
@@ -380,7 +361,6 @@ Voici des exemples de récupération de valeurs à partir de différents types d
 ```java
 import org.junit.jupiter.api.Test;
 import org.makechtec.software.json_tree.builders.ArrayStringLeafBuilder;
-import org.makechtec.software.json_tree.primitives.StringJSONLeaf;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -395,7 +375,7 @@ class ArrayStringLeafRetrievalTest {
                 .add("Cerise")
                 .build();
 
-        var fruitLeaf = arrayLeaf.asLeaf(1, StringJSONLeaf.class);
+        var fruitLeaf = arrayLeaf.asLeaf(1);
 
         assertTrue(fruitLeaf.isPresent());
         assertEquals("\"Banane\"", fruitLeaf.get().getLeafValue());
@@ -408,7 +388,6 @@ class ArrayStringLeafRetrievalTest {
 ```java
 import org.junit.jupiter.api.Test;
 import org.makechtec.software.json_tree.builders.ArrayNumberLeafBuilder;
-import org.makechtec.software.json_tree.primitives.NumberJSONLeaf;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -423,7 +402,7 @@ class ArrayNumberLeafRetrievalTest {
                 .add(30L)
                 .build();
 
-        var numberLeaf = arrayLeaf.asLeaf(1, NumberJSONLeaf.class);
+        var numberLeaf = arrayLeaf.asLeaf(1);
 
         assertTrue(numberLeaf.isPresent());
         assertEquals("20.5", numberLeaf.get().getLeafValue());
@@ -436,7 +415,6 @@ class ArrayNumberLeafRetrievalTest {
 ```java
 import org.junit.jupiter.api.Test;
 import org.makechtec.software.json_tree.builders.ArrayBooleanLeafBuilder;
-import org.makechtec.software.json_tree.primitives.BooleanJSONLeaf;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -451,7 +429,7 @@ class ArrayBooleanLeafRetrievalTest {
                 .add(true)
                 .build();
 
-        var booleanLeaf = arrayLeaf.asLeaf(1, BooleanJSONLeaf.class);
+        var booleanLeaf = arrayLeaf.asLeaf(1);
 
         assertTrue(booleanLeaf.isPresent());
         assertEquals("false", booleanLeaf.get().getLeafValue());
