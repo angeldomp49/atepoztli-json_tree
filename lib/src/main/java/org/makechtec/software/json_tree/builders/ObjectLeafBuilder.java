@@ -13,7 +13,8 @@ public class ObjectLeafBuilder {
 
     private final Map<String, JSONLeaf> leafs = new HashMap<>();
 
-    private ObjectLeafBuilder() {}
+    private ObjectLeafBuilder() {
+    }
 
     public static ObjectLeafBuilder builder() {
         return new ObjectLeafBuilder();

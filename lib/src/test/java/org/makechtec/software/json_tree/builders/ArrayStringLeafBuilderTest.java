@@ -3,7 +3,10 @@ package org.makechtec.software.json_tree.builders;
 import org.json.JSONArray;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ArrayStringLeafBuilderTest {
 
@@ -75,7 +78,7 @@ class ArrayStringLeafBuilderTest {
                 .build();
 
         // When/Then
-        assertThrows(IndexOutOfBoundsException.class, () -> 
+        assertThrows(IndexOutOfBoundsException.class, () ->
                 arrayLeaf.asLeaf(5, String.class));
     }
 
@@ -87,7 +90,7 @@ class ArrayStringLeafBuilderTest {
                 .build();
 
         // When/Then
-        assertThrows(ClassCastException.class, () -> 
+        assertThrows(ClassCastException.class, () ->
                 arrayLeaf.asLeaf(0, Integer.class));
     }
 

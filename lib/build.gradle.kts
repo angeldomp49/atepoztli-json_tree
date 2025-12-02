@@ -47,16 +47,17 @@ publishing {
         create<MavenPublication>("maven") {
             groupId = "org.makechtec.software"
             artifactId = "json_tree"
-            version = "3.0.2"
+            version = "3.1.0"
 
             from(components["java"])
         }
     }
-    
-    repositories{
-        maven{
-            url = uri("https://makech-technology-879381274336.d.codeartifact.us-east-2.amazonaws.com/maven/makech-technology-maven-repository/")
-            credentials{
+
+    repositories {
+        maven {
+            url =
+                uri("https://makech-technology-879381274336.d.codeartifact.us-east-2.amazonaws.com/maven/makech-technology-maven-repository/")
+            credentials {
                 username = "aws"
                 password = System.getenv("CODEARTIFACT_AUTH_TOKEN")
             }

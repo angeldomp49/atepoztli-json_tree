@@ -9,7 +9,9 @@ import org.makechtec.software.json_tree.primitives.BooleanJSONLeaf;
 import org.makechtec.software.json_tree.primitives.NumberJSONLeaf;
 import org.makechtec.software.json_tree.primitives.StringJSONLeaf;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ObjectLeafOperatorTest {
 

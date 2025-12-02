@@ -34,7 +34,7 @@ public class ArrayStringLeaf implements JSONIndexKeyLeaf {
     @Override
     public boolean isEmpty() {
         var hasNoLeafs = this.values.isEmpty();
-        return hasNoLeafs || 
+        return hasNoLeafs ||
                 this.values
                         .stream()
                         .allMatch(String::isEmpty);

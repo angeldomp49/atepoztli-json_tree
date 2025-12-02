@@ -32,9 +32,9 @@ public record ObjectLeaf(Map<String, JSONLeaf> leafs) implements JSONStringKeyLe
 
     @Override
     public boolean isEmpty() {
-        
+
         var hasNoLeafs = this.leafs.isEmpty();
-        return hasNoLeafs || 
+        return hasNoLeafs ||
                 this.leafs
                         .values()
                         .stream()

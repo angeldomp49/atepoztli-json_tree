@@ -6,7 +6,10 @@ import org.makechtec.software.json_tree.primitives.BooleanJSONLeaf;
 import org.makechtec.software.json_tree.primitives.NumberJSONLeaf;
 import org.makechtec.software.json_tree.primitives.StringJSONLeaf;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ObjectLeafBuilderTest {
 
@@ -78,7 +81,7 @@ class ObjectLeafBuilderTest {
         // Then
         assertTrue(resultTrue.isPresent());
         assertEquals("true", resultTrue.get().getLeafValue());
-        
+
         assertTrue(resultFalse.isPresent());
         assertEquals("false", resultFalse.get().getLeafValue());
     }
@@ -91,7 +94,7 @@ class ObjectLeafBuilderTest {
                 .build();
 
         // When/Then
-        assertThrows(NullPointerException.class, () -> 
+        assertThrows(NullPointerException.class, () ->
                 objectLeaf.asLeaf("nonExistentKey", StringJSONLeaf.class));
     }
 
@@ -103,7 +106,7 @@ class ObjectLeafBuilderTest {
                 .build();
 
         // When/Then
-        assertThrows(ClassCastException.class, () -> 
+        assertThrows(ClassCastException.class, () ->
                 objectLeaf.asLeaf("id", StringJSONLeaf.class));
     }
 }

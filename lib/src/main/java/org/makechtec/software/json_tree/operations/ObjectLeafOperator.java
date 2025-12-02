@@ -6,8 +6,8 @@ import org.makechtec.software.json_tree.ObjectLeaf;
 import java.util.HashMap;
 
 public class ObjectLeafOperator {
-    
-    public ObjectLeaf merge(ObjectLeaf... leaves){
+
+    public ObjectLeaf merge(ObjectLeaf... leaves) {
         var allLeafs = new HashMap<String, JSONLeaf>();
 
         if (leaves == null) return new ObjectLeaf(allLeafs);
@@ -16,8 +16,8 @@ public class ObjectLeafOperator {
             if (leaf == null) continue;
             allLeafs.putAll(leaf.leafs());
         }
-        
+
         return new ObjectLeaf(allLeafs);
     }
-    
+
 }

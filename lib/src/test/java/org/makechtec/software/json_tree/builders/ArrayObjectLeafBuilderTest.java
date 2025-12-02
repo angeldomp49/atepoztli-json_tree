@@ -5,7 +5,10 @@ import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.makechtec.software.json_tree.ObjectLeaf;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ArrayObjectLeafBuilderTest {
 
@@ -57,7 +60,7 @@ class ArrayObjectLeafBuilderTest {
         // Then
         assertTrue(result.isPresent());
         assertEquals(item1, result.get());
-        
+
         var json = new JSONObject(result.get().getLeafValue());
         assertEquals(1, json.getInt("id"));
         assertEquals("Alice", json.getString("name"));
@@ -87,7 +90,7 @@ class ArrayObjectLeafBuilderTest {
         // Then
         assertTrue(result.isPresent());
         assertEquals(item2, result.get());
-        
+
         var json = new JSONObject(result.get().getLeafValue());
         assertEquals(2, json.getInt("id"));
         assertEquals("Bob", json.getString("name"));
@@ -105,7 +108,7 @@ class ArrayObjectLeafBuilderTest {
                 .build();
 
         // When/Then
-        assertThrows(IndexOutOfBoundsException.class, () -> 
+        assertThrows(IndexOutOfBoundsException.class, () ->
                 arrayLeaf.asLeaf(5, ObjectLeaf.class));
     }
 }
