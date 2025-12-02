@@ -5,11 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.makechtec.software.json_tree.ObjectLeaf;
 import org.makechtec.software.json_tree.builders.ObjectLeafBuilder;
-import org.makechtec.software.json_tree.primitives.BooleanJSONLeaf;
-import org.makechtec.software.json_tree.primitives.NumberJSONLeaf;
-import org.makechtec.software.json_tree.primitives.StringJSONLeaf;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -182,7 +180,6 @@ class ObjectLeafOperatorTest {
 
     @Test
     void asLeaf_shouldRetrieveFieldFromMergedObjectLeaf() {
-        // Given
         ObjectLeaf leaf1 = ObjectLeafBuilder.builder()
                 .put("id", 1)
                 .put("name", "Alice")
@@ -195,13 +192,11 @@ class ObjectLeafOperatorTest {
 
         ObjectLeaf merged = operator.merge(leaf1, leaf2);
 
-        // When
-        var nameResult = merged.asLeaf("name", StringJSONLeaf.class);
-        var idResult = merged.asLeaf("id", NumberJSONLeaf.class);
-        var ageResult = merged.asLeaf("age", NumberJSONLeaf.class);
-        var activeResult = merged.asLeaf("active", BooleanJSONLeaf.class);
+        var nameResult = merged.asLeaf("name");
+        var idResult = merged.asLeaf("id");
+        var ageResult = merged.asLeaf("age");
+        var activeResult = merged.asLeaf("active");
 
-        // Then
         assertTrue(nameResult.isPresent());
         assertEquals("\"Alice\"", nameResult.get().getLeafValue());
 
@@ -217,7 +212,6 @@ class ObjectLeafOperatorTest {
 
     @Test
     void asLeaf_shouldRetrieveOverwrittenFieldValue() {
-        // Given
         ObjectLeaf leaf1 = ObjectLeafBuilder.builder()
                 .put("status", "pending")
                 .build();
@@ -228,12 +222,211 @@ class ObjectLeafOperatorTest {
 
         ObjectLeaf merged = operator.merge(leaf1, leaf2);
 
-        // When
-        var statusResult = merged.asLeaf("status", StringJSONLeaf.class);
+        var statusResult = merged.asLeaf("status");
 
-        // Then
         assertTrue(statusResult.isPresent());
         assertEquals("\"approved\"", statusResult.get().getLeafValue());
     }
+
+    @Test
+    void merge_shouldHandleNestedObjects() {
+        ObjectLeaf nestedLeaf = ObjectLeafBuilder.builder()
+                .put("street", "123 Main St")
+                .put("city", "Boston")
+                .build();
+
+        ObjectLeaf leaf1 = ObjectLeafBuilder.builder()
+                .put("id", 1)
+                .put("address", nestedLeaf)
+                .build();
+
+        ObjectLeaf leaf2 = ObjectLeafBuilder.builder()
+                .put("name", "Alice")
+                .build();
+
+        ObjectLeaf result = operator.merge(leaf1, leaf2);
+
+        JSONObject json = new JSONObject(result.getLeafValue());
+        assertEquals(1, json.getInt("id"));
+        assertEquals("Alice", json.getString("name"));
+        assertTrue(json.has("address"));
+    }
+
+    @Test
+    void merge_shouldHandleEmptyLeaves() {
+        ObjectLeaf emptyLeaf1 = ObjectLeafBuilder.builder().build();
+        ObjectLeaf emptyLeaf2 = ObjectLeafBuilder.builder().build();
+
+        ObjectLeaf result = operator.merge(emptyLeaf1, emptyLeaf2);
+
+        assertNotNull(result);
+        assertEquals("{}", result.getLeafValue());
+    }
+
+    @Test
+    void merge_shouldPreserveLastValueForDuplicateKeys() {
+        ObjectLeaf leaf1 = ObjectLeafBuilder.builder()
+                .put("key", "first")
+                .build();
+
+        ObjectLeaf leaf2 = ObjectLeafBuilder.builder()
+                .put("key", "second")
+                .build();
+
+        ObjectLeaf leaf3 = ObjectLeafBuilder.builder()
+                .put("key", "third")
+                .build();
+
+        ObjectLeaf result = operator.merge(leaf1, leaf2, leaf3);
+
+        JSONObject json = new JSONObject(result.getLeafValue());
+        assertEquals("third", json.getString("key"));
+    }
+
+    @Test
+    void extractStringValue_shouldReturnStringForStringLeaf() {
+        ObjectLeaf leaf = ObjectLeafBuilder.builder()
+                .put("name", "John Doe")
+                .build();
+
+        var nameLeaf = leaf.asLeaf("name");
+        assertTrue(nameLeaf.isPresent());
+
+        var result = operator.extractStringValue(nameLeaf.get());
+
+        assertTrue(result.isPresent());
+        assertEquals("\"John Doe\"", result.get());
+    }
+
+    @Test
+    void extractStringValue_shouldReturnEmptyForNonStringLeaf() {
+        ObjectLeaf leaf = ObjectLeafBuilder.builder()
+                .put("count", 42)
+                .build();
+
+        var countLeaf = leaf.asLeaf("count");
+        assertTrue(countLeaf.isPresent());
+
+        var result = operator.extractStringValue(countLeaf.get());
+
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    void extractBooleanValue_shouldReturnBooleanForBooleanLeaf() {
+        ObjectLeaf leaf = ObjectLeafBuilder.builder()
+                .put("isActive", true)
+                .build();
+
+        var activeLeaf = leaf.asLeaf("isActive");
+        assertTrue(activeLeaf.isPresent());
+
+        var result = operator.extractBooleanValue(activeLeaf.get());
+
+        assertTrue(result.isPresent());
+        assertTrue(result.get());
+    }
+
+    @Test
+    void extractBooleanValue_shouldReturnFalseForFalseBooleanLeaf() {
+        ObjectLeaf leaf = ObjectLeafBuilder.builder()
+                .put("isActive", false)
+                .build();
+
+        var activeLeaf = leaf.asLeaf("isActive");
+        assertTrue(activeLeaf.isPresent());
+
+        var result = operator.extractBooleanValue(activeLeaf.get());
+
+        assertTrue(result.isPresent());
+        assertFalse(result.get());
+    }
+
+    @Test
+    void extractBooleanValue_shouldReturnEmptyForNonBooleanLeaf() {
+        ObjectLeaf leaf = ObjectLeafBuilder.builder()
+                .put("name", "test")
+                .build();
+
+        var nameLeaf = leaf.asLeaf("name");
+        assertTrue(nameLeaf.isPresent());
+
+        var result = operator.extractBooleanValue(nameLeaf.get());
+
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    void extractLongValue_shouldReturnDoubleForNumberLeaf() {
+        ObjectLeaf leaf = ObjectLeafBuilder.builder()
+                .put("price", 99.99)
+                .build();
+
+        var priceLeaf = leaf.asLeaf("price");
+        assertTrue(priceLeaf.isPresent());
+
+        var result = operator.extractLongValue(priceLeaf.get());
+
+        assertTrue(result.isPresent());
+        assertEquals(99.99, result.get(), 0.001);
+    }
+
+    @Test
+    void extractLongValue_shouldReturnIntegerAsDouble() {
+        ObjectLeaf leaf = ObjectLeafBuilder.builder()
+                .put("count", 42)
+                .build();
+
+        var countLeaf = leaf.asLeaf("count");
+        assertTrue(countLeaf.isPresent());
+
+        var result = operator.extractLongValue(countLeaf.get());
+
+        assertTrue(result.isPresent());
+        assertEquals(42.0, result.get(), 0.001);
+    }
+
+    @Test
+    void extractLongValue_shouldReturnEmptyForNonNumberLeaf() {
+        ObjectLeaf leaf = ObjectLeafBuilder.builder()
+                .put("name", "test")
+                .build();
+
+        var nameLeaf = leaf.asLeaf("name");
+        assertTrue(nameLeaf.isPresent());
+
+        var result = operator.extractLongValue(nameLeaf.get());
+
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    void merge_shouldHandleMixedTypesInMultipleLeaves() {
+        ObjectLeaf leaf1 = ObjectLeafBuilder.builder()
+                .put("id", 1)
+                .put("name", "Product A")
+                .build();
+
+        ObjectLeaf leaf2 = ObjectLeafBuilder.builder()
+                .put("price", 29.99)
+                .put("inStock", true)
+                .build();
+
+        ObjectLeaf leaf3 = ObjectLeafBuilder.builder()
+                .put("category", "Electronics")
+                .put("quantity", 100)
+                .build();
+
+        ObjectLeaf result = operator.merge(leaf1, leaf2, leaf3);
+
+        JSONObject json = new JSONObject(result.getLeafValue());
+        assertEquals(1, json.getInt("id"));
+        assertEquals("Product A", json.getString("name"));
+        assertEquals(29.99, json.getDouble("price"), 0.001);
+        assertTrue(json.getBoolean("inStock"));
+        assertEquals("Electronics", json.getString("category"));
+        assertEquals(100, json.getInt("quantity"));
+    }
 }
+
 

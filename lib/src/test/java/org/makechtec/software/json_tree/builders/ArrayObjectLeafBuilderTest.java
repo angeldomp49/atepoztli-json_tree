@@ -3,7 +3,6 @@ package org.makechtec.software.json_tree.builders;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
-import org.makechtec.software.json_tree.ObjectLeaf;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -38,7 +37,6 @@ class ArrayObjectLeafBuilderTest {
 
     @Test
     void asLeaf_shouldReturnObjectLeafAtIndex() {
-        // Given
         var item1 = ObjectLeafBuilder.builder()
                 .put("id", 1)
                 .put("name", "Alice")
@@ -54,10 +52,8 @@ class ArrayObjectLeafBuilderTest {
                 .add(item2)
                 .build();
 
-        // When
-        var result = arrayLeaf.asLeaf(0, ObjectLeaf.class);
+        var result = arrayLeaf.asLeaf(0);
 
-        // Then
         assertTrue(result.isPresent());
         assertEquals(item1, result.get());
 
@@ -68,7 +64,6 @@ class ArrayObjectLeafBuilderTest {
 
     @Test
     void asLeaf_shouldReturnSecondElementAtIndex1() {
-        // Given
         var item1 = ObjectLeafBuilder.builder()
                 .put("id", 1)
                 .put("name", "Alice")
@@ -84,10 +79,8 @@ class ArrayObjectLeafBuilderTest {
                 .add(item2)
                 .build();
 
-        // When
-        var result = arrayLeaf.asLeaf(1, ObjectLeaf.class);
+        var result = arrayLeaf.asLeaf(1);
 
-        // Then
         assertTrue(result.isPresent());
         assertEquals(item2, result.get());
 
@@ -98,7 +91,6 @@ class ArrayObjectLeafBuilderTest {
 
     @Test
     void asLeaf_shouldThrowIndexOutOfBoundsForInvalidIndex() {
-        // Given
         var item = ObjectLeafBuilder.builder()
                 .put("id", 1)
                 .build();
@@ -107,8 +99,8 @@ class ArrayObjectLeafBuilderTest {
                 .add(item)
                 .build();
 
-        // When/Then
         assertThrows(IndexOutOfBoundsException.class, () ->
-                arrayLeaf.asLeaf(5, ObjectLeaf.class));
+                arrayLeaf.asLeaf(5));
     }
 }
+

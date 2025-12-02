@@ -2,7 +2,6 @@ package org.makechtec.software.json_tree.builders;
 
 import org.json.JSONArray;
 import org.junit.jupiter.api.Test;
-import org.makechtec.software.json_tree.primitives.NumberJSONLeaf;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -13,7 +12,6 @@ class ArrayNumberLeafBuilderTest {
 
     @Test
     void build() {
-        // Given/When
         var result = ArrayNumberLeafBuilder.builder()
                 .add(10)
                 .add(20.5)
@@ -23,7 +21,6 @@ class ArrayNumberLeafBuilderTest {
 
         var array = new JSONArray(result);
 
-        // Then
         assertEquals(3, array.length());
         assertEquals(10, array.getInt(0));
         assertEquals(20.5, array.getDouble(1));
@@ -32,19 +29,16 @@ class ArrayNumberLeafBuilderTest {
 
     @Test
     void asLeaf_shouldReturnNumberAtIndex() {
-        // Given
         var arrayLeaf = ArrayNumberLeafBuilder.builder()
                 .add(42)
                 .add(3.14)
                 .add(100L)
                 .build();
 
-        // When
-        var result0 = arrayLeaf.asLeaf(0, NumberJSONLeaf.class);
-        var result1 = arrayLeaf.asLeaf(1, NumberJSONLeaf.class);
-        var result2 = arrayLeaf.asLeaf(2, NumberJSONLeaf.class);
+        var result0 = arrayLeaf.asLeaf(0);
+        var result1 = arrayLeaf.asLeaf(1);
+        var result2 = arrayLeaf.asLeaf(2);
 
-        // Then
         assertTrue(result0.isPresent());
         assertEquals("42", result0.get().getLeafValue());
 
@@ -57,78 +51,54 @@ class ArrayNumberLeafBuilderTest {
 
     @Test
     void asLeaf_shouldReturnIntegerWhenCastToInteger() {
-        // Given
         var arrayLeaf = ArrayNumberLeafBuilder.builder()
                 .add(42)
                 .add(99)
                 .build();
 
-        // When
-        var result = arrayLeaf.asLeaf(0, NumberJSONLeaf.class);
+        var result = arrayLeaf.asLeaf(0);
 
-        // Then
         assertTrue(result.isPresent());
         assertEquals("42", result.get().getLeafValue());
     }
 
     @Test
     void asLeaf_shouldReturnDoubleWhenCastToDouble() {
-        // Given
         var arrayLeaf = ArrayNumberLeafBuilder.builder()
                 .add(3.14159)
                 .add(2.71828)
                 .build();
 
-        // When
-        var result = arrayLeaf.asLeaf(1, NumberJSONLeaf.class);
+        var result = arrayLeaf.asLeaf(1);
 
-        // Then
         assertTrue(result.isPresent());
         assertEquals("2.71828", result.get().getLeafValue());
     }
 
     @Test
     void asLeaf_shouldThrowIndexOutOfBoundsForInvalidIndex() {
-        // Given
         var arrayLeaf = ArrayNumberLeafBuilder.builder()
                 .add(1)
                 .add(2)
                 .build();
 
-        // When/Then
         assertThrows(IndexOutOfBoundsException.class, () ->
-                arrayLeaf.asLeaf(10, NumberJSONLeaf.class));
-    }
-
-    @Test
-    void asLeaf_shouldThrowClassCastExceptionForWrongType() {
-        // Given
-        var arrayLeaf = ArrayNumberLeafBuilder.builder()
-                .add(42)
-                .build();
-
-        // When/Then
-        assertThrows(ClassCastException.class, () ->
-                arrayLeaf.asLeaf(0, String.class));
+                arrayLeaf.asLeaf(10));
     }
 
     @Test
     void isEmpty_shouldReturnTrueForEmptyArray() {
-        // Given
         var arrayLeaf = ArrayNumberLeafBuilder.builder().build();
 
-        // When/Then
         assertTrue(arrayLeaf.isEmpty());
     }
 
     @Test
     void isEmpty_shouldReturnFalseForNonEmptyArray() {
-        // Given
         var arrayLeaf = ArrayNumberLeafBuilder.builder()
                 .add(0)
                 .build();
 
-        // When/Then
         assertFalse(arrayLeaf.isEmpty());
     }
 }
