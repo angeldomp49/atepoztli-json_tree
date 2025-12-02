@@ -6,7 +6,7 @@ public interface JSONLeaf {
     String getLeafValue();
 
     boolean isEmpty();
-    
+
     LeafContent getLeafContent();
 
 }

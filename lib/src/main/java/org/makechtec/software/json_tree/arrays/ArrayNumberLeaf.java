@@ -46,7 +46,7 @@ public class ArrayNumberLeaf implements JSONIndexKeyLeaf {
     @Override
     public <T> Optional<T> asLeaf(int key, Class<T> type) {
         var wrapper = new NumberJSONLeaf(values.get(key));
-        
+
         return Optional.of(type.cast(wrapper));
     }
 }

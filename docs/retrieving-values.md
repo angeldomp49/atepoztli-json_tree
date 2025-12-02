@@ -1,6 +1,7 @@
 # Value Retrieval
 
-The `JSONLeaf` interface has two specialized child interfaces for value retrieval: `JSONStringKeyLeaf` and `JSONIndexKeyLeaf`. These interfaces provide a convenient `asLeaf` method to access nested values in a type-safe manner.
+The `JSONLeaf` interface has two specialized child interfaces for value retrieval: `JSONStringKeyLeaf` and
+`JSONIndexKeyLeaf`. These interfaces provide a convenient `asLeaf` method to access nested values in a type-safe manner.
 
 ---
 
@@ -12,7 +13,8 @@ The `JSONLeaf` interface has two specialized child interfaces for value retrieva
 
 #### Usage
 
-The `asLeaf(String key, Class<T> type)` method returns an `Optional<T>` containing the value if the key exists and the type matches.
+The `asLeaf(String key, Class<T> type)` method returns an `Optional<T>` containing the value if the key exists and the
+type matches.
 
 #### Examples
 
@@ -56,17 +58,21 @@ class ObjectLeafRetrievalTest {
 
 ### Retrieving from Array Leaves (by index)
 
-Array-based leaves like `ArrayStringLeaf`, `ArrayNumberLeaf`, `ArrayBooleanLeaf`, and `ArrayObjectLeaf` implement `JSONIndexKeyLeaf`. This allows you to retrieve values by their numeric index.
+Array-based leaves like `ArrayStringLeaf`, `ArrayNumberLeaf`, `ArrayBooleanLeaf`, and `ArrayObjectLeaf` implement
+`JSONIndexKeyLeaf`. This allows you to retrieve values by their numeric index.
 
 #### Usage
 
-The `asLeaf(int index, Class<T> type)` method returns an `Optional<T>` containing the value if the index is valid and the type is correct. For primitive types, this will be a wrapper class like `StringJSONLeaf`, `NumberJSONLeaf`, or `BooleanJSONLeaf`.
+The `asLeaf(int index, Class<T> type)` method returns an `Optional<T>` containing the value if the index is valid and
+the type is correct. For primitive types, this will be a wrapper class like `StringJSONLeaf`, `NumberJSONLeaf`, or
+`BooleanJSONLeaf`.
 
 #### Examples
 
 Here are examples of retrieving values from different types of array leaves:
 
 **`ArrayStringLeaf`**
+
 ```java
 import org.junit.jupiter.api.Test;
 import org.makechtec.software.json_tree.builders.ArrayStringLeafBuilder;
@@ -94,6 +100,7 @@ class ArrayStringLeafRetrievalTest {
 ```
 
 **`ArrayNumberLeaf`**
+
 ```java
 import org.junit.jupiter.api.Test;
 import org.makechtec.software.json_tree.builders.ArrayNumberLeafBuilder;
@@ -121,6 +128,7 @@ class ArrayNumberLeafRetrievalTest {
 ```
 
 **`ArrayBooleanLeaf`**
+
 ```java
 import org.junit.jupiter.api.Test;
 import org.makechtec.software.json_tree.builders.ArrayBooleanLeafBuilder;
@@ -157,7 +165,8 @@ class ArrayBooleanLeafRetrievalTest {
 
 #### Uso
 
-El método `asLeaf(String key, Class<T> type)` devuelve un `Optional<T>` que contiene el valor si la clave existe y el tipo coincide.
+El método `asLeaf(String key, Class<T> type)` devuelve un `Optional<T>` que contiene el valor si la clave existe y el
+tipo coincide.
 
 #### Ejemplos
 
@@ -201,17 +210,21 @@ class ObjectLeafRetrievalTest {
 
 ### Recuperación desde Hojas de Array (por índice)
 
-Las hojas basadas en arrays como `ArrayStringLeaf`, `ArrayNumberLeaf`, `ArrayBooleanLeaf` y `ArrayObjectLeaf` implementan `JSONIndexKeyLeaf`. Esto permite recuperar valores por su índice numérico.
+Las hojas basadas en arrays como `ArrayStringLeaf`, `ArrayNumberLeaf`, `ArrayBooleanLeaf` y `ArrayObjectLeaf`
+implementan `JSONIndexKeyLeaf`. Esto permite recuperar valores por su índice numérico.
 
 #### Uso
 
-El método `asLeaf(int index, Class<T> type)` devuelve un `Optional<T>` que contiene el valor si el índice es válido y el tipo es correcto. Para tipos primitivos, este será una clase contenedora como `StringJSONLeaf`, `NumberJSONLeaf` o `BooleanJSONLeaf`.
+El método `asLeaf(int index, Class<T> type)` devuelve un `Optional<T>` que contiene el valor si el índice es válido y el
+tipo es correcto. Para tipos primitivos, este será una clase contenedora como `StringJSONLeaf`, `NumberJSONLeaf` o
+`BooleanJSONLeaf`.
 
 #### Ejemplos
 
 A continuación, se muestran ejemplos de cómo recuperar valores desde diferentes tipos de hojas de array:
 
 **`ArrayStringLeaf`**
+
 ```java
 import org.junit.jupiter.api.Test;
 import org.makechtec.software.json_tree.builders.ArrayStringLeafBuilder;
@@ -239,6 +252,7 @@ class ArrayStringLeafRetrievalTest {
 ```
 
 **`ArrayNumberLeaf`**
+
 ```java
 import org.junit.jupiter.api.Test;
 import org.makechtec.software.json_tree.builders.ArrayNumberLeafBuilder;
@@ -266,6 +280,7 @@ class ArrayNumberLeafRetrievalTest {
 ```
 
 **`ArrayBooleanLeaf`**
+
 ```java
 import org.junit.jupiter.api.Test;
 import org.makechtec.software.json_tree.builders.ArrayBooleanLeafBuilder;
@@ -302,7 +317,8 @@ class ArrayBooleanLeafRetrievalTest {
 
 #### Utilisation
 
-La méthode `asLeaf(String key, Class<T> type)` renvoie un `Optional<T>` contenant la valeur si la clé existe et que le type correspond.
+La méthode `asLeaf(String key, Class<T> type)` renvoie un `Optional<T>` contenant la valeur si la clé existe et que le
+type correspond.
 
 #### Exemples
 
@@ -346,17 +362,21 @@ class ObjectLeafRetrievalTest {
 
 ### Récupération depuis les Feuilles de Tableau (par index)
 
-Les feuilles basées sur des tableaux comme `ArrayStringLeaf`, `ArrayNumberLeaf`, `ArrayBooleanLeaf` et `ArrayObjectLeaf` implémentent `JSONIndexKeyLeaf`. Cela permet de récupérer des valeurs par leur index numérique.
+Les feuilles basées sur des tableaux comme `ArrayStringLeaf`, `ArrayNumberLeaf`, `ArrayBooleanLeaf` et `ArrayObjectLeaf`
+implémentent `JSONIndexKeyLeaf`. Cela permet de récupérer des valeurs par leur index numérique.
 
 #### Utilisation
 
-La méthode `asLeaf(int index, Class<T> type)` renvoie un `Optional<T>` contenant la valeur si l'index est valide et que le type est correct. Pour les types primitifs, ce sera une classe d'emballage comme `StringJSONLeaf`, `NumberJSONLeaf` ou `BooleanJSONLeaf`.
+La méthode `asLeaf(int index, Class<T> type)` renvoie un `Optional<T>` contenant la valeur si l'index est valide et que
+le type est correct. Pour les types primitifs, ce sera une classe d'emballage comme `StringJSONLeaf`, `NumberJSONLeaf`
+ou `BooleanJSONLeaf`.
 
 #### Exemples
 
 Voici des exemples de récupération de valeurs à partir de différents types de feuilles de tableau:
 
 **`ArrayStringLeaf`**
+
 ```java
 import org.junit.jupiter.api.Test;
 import org.makechtec.software.json_tree.builders.ArrayStringLeafBuilder;
@@ -384,6 +404,7 @@ class ArrayStringLeafRetrievalTest {
 ```
 
 **`ArrayNumberLeaf`**
+
 ```java
 import org.junit.jupiter.api.Test;
 import org.makechtec.software.json_tree.builders.ArrayNumberLeafBuilder;
@@ -411,6 +432,7 @@ class ArrayNumberLeafRetrievalTest {
 ```
 
 **`ArrayBooleanLeaf`**
+
 ```java
 import org.junit.jupiter.api.Test;
 import org.makechtec.software.json_tree.builders.ArrayBooleanLeafBuilder;

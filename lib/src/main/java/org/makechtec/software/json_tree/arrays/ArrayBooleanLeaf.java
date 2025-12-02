@@ -46,7 +46,7 @@ public class ArrayBooleanLeaf implements JSONIndexKeyLeaf {
     @Override
     public <T> Optional<T> asLeaf(int key, Class<T> type) {
         var wrapper = new BooleanJSONLeaf(values.get(key));
-        
+
         return Optional.of(type.cast(wrapper));
     }
 
