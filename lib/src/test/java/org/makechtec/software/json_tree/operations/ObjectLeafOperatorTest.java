@@ -198,7 +198,7 @@ class ObjectLeafOperatorTest {
         var activeResult = merged.asLeaf("active");
 
         assertTrue(nameResult.isPresent());
-        assertEquals("Alice", nameResult.get().getLeafValue());
+        assertEquals("\"Alice\"", nameResult.get().getLeafValue());
 
         assertTrue(idResult.isPresent());
         assertEquals("1", idResult.get().getLeafValue());
@@ -225,7 +225,7 @@ class ObjectLeafOperatorTest {
         var statusResult = merged.asLeaf("status");
 
         assertTrue(statusResult.isPresent());
-        assertEquals("approved", statusResult.get().getLeafValue());
+        assertEquals("\"approved\"", statusResult.get().getLeafValue());
     }
 
     @Test

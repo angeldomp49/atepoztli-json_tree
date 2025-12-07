@@ -40,13 +40,13 @@ class ArrayStringLeafBuilderTest {
         var result2 = arrayLeaf.asLeaf(2);
 
         assertTrue(result0.isPresent());
-        assertEquals("Hello", result0.get().getLeafValue());
+        assertEquals("\"Hello\"", result0.get().getLeafValue());
 
         assertTrue(result1.isPresent());
-        assertEquals("World", result1.get().getLeafValue());
+        assertEquals("\"World\"", result1.get().getLeafValue());
 
         assertTrue(result2.isPresent());
-        assertEquals("Test", result2.get().getLeafValue());
+        assertEquals("\"Test\"", result2.get().getLeafValue());
     }
 
     @Test
@@ -59,7 +59,7 @@ class ArrayStringLeafBuilderTest {
         var result = arrayLeaf.asLeaf(0);
 
         assertTrue(result.isPresent());
-        assertEquals("", result.get().getLeafValue());
+        assertEquals("\"\"", result.get().getLeafValue());
     }
 
     @Test

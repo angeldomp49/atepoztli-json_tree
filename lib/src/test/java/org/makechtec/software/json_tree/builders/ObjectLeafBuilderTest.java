@@ -53,7 +53,7 @@ class ObjectLeafBuilderTest {
         var result = objectLeaf.asLeaf("name");
 
         assertTrue(result.isPresent());
-        assertEquals("Alice", result.get().getLeafValue());
+        assertEquals("\"Alice\"", result.get().getLeafValue());
     }
 
     @Test
