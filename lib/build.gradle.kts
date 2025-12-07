@@ -26,7 +26,7 @@ dependencies {
     api("org.apache.commons:commons-math3:3.6.1")
 
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
-    implementation("com.google.guava:guava:31.1-jre")
+    implementation("com.google.guava:guava:32.0.1-android")
     implementation("org.json:json:20231013")
 }
 
@@ -47,7 +47,7 @@ publishing {
         create<MavenPublication>("maven") {
             groupId = "org.makechtec.software"
             artifactId = "json_tree"
-            version = "3.1.5"
+            version = "3.1.6"
 
             from(components["java"])
         }
