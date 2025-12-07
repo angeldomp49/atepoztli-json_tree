@@ -27,7 +27,7 @@ public class ObjectLeafOperator {
             return Optional.empty();
         }
 
-        return Optional.of(leaf.getLeafValue());
+        return Optional.of(leaf.getLeafValue().replace("\"", ""));
     }
 
     public Optional<Boolean> extractBooleanValue(JSONLeaf leaf) {

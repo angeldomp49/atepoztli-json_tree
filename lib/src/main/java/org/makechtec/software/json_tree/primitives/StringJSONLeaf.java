@@ -19,7 +19,7 @@ public class StringJSONLeaf implements JSONLeaf {
 
     @Override
     public String getLeafValue() {
-        return this.value;
+        return "\"" + value + "\"";
     }
 
     @Override
