@@ -47,7 +47,7 @@ publishing {
         create<MavenPublication>("maven") {
             groupId = "org.makechtec.software"
             artifactId = "json_tree"
-            version = "3.1.4"
+            version = "3.1.5"
 
             from(components["java"])
         }
